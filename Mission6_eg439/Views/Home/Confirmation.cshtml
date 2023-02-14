@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = " Submitted";
+}
+
+@model Mission6_eg439.Models.Movie
+
+@if (Model.Title == "Bridge to Teribithya")
+{
+    <h2>We are not adding that movie because it sucks</h2>
+}
+else
+{
+    <h2>@Model.Title has been submitted. Dub.</h2>
+}
