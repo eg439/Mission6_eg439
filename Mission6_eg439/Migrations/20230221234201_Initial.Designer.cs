@@ -8,7 +8,7 @@ using Mission6_eg439.Models;
 namespace Mission6_eg439.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230214060116_Initial")]
+    [Migration("20230221234201_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,14 +17,75 @@ namespace Mission6_eg439.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission6_eg439.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "SciFi"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Thriller"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Fantasy"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Mystery"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            CategoryName = "Musical"
+                        });
+                });
+
             modelBuilder.Entity("Mission6_eg439.Models.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .HasColumnType("TEXT");
@@ -49,13 +110,15 @@ namespace Mission6_eg439.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Your Mom",
                             Edited = true,
                             Rating = "PG-13",
@@ -65,7 +128,7 @@ namespace Mission6_eg439.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Your Dad",
                             Edited = false,
                             Notes = "This is possibly the best movie ever created",
@@ -76,7 +139,7 @@ namespace Mission6_eg439.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Romance/Coming of Age",
+                            CategoryId = 3,
                             Director = "Your Dad",
                             Edited = false,
                             Notes = "This is another one of the greatest films every made",
@@ -84,6 +147,15 @@ namespace Mission6_eg439.Migrations
                             Title = "Cinderlla Story: Hillary Duff",
                             Year = "2011"
                         });
+                });
+
+            modelBuilder.Entity("Mission6_eg439.Models.Movie", b =>
+                {
+                    b.HasOne("Mission6_eg439.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

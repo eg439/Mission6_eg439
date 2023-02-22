@@ -15,16 +15,33 @@ namespace Mission6_eg439.Models
         }
 
         public DbSet<Movie> responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+
+            mb.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Action/Adventure" },
+                new Category { CategoryId = 2, CategoryName = "Comedy" },
+                new Category { CategoryId = 3, CategoryName = "Romance" },
+                new Category { CategoryId = 4, CategoryName = "SciFi" },
+                new Category { CategoryId = 5, CategoryName = "Horror" },
+                new Category { CategoryId = 6, CategoryName = "Thriller" },
+                new Category { CategoryId = 7, CategoryName = "Fantasy" },
+                new Category { CategoryId = 8, CategoryName = "Mystery" },
+                new Category { CategoryId = 9, CategoryName = "Musical" }
+                );
+
+
+
+
             mb.Entity<Movie>().HasData(
                 new Movie
                 {
                     MovieId = 1,
                     Title = "Fast and Furious",
-                    Category = "Action",
+                    CategoryId = 1,
                     Year = "1999",
                     Director = "Your Mom",
                     Rating = "PG-13",
@@ -34,7 +51,7 @@ namespace Mission6_eg439.Models
                 {
                     MovieId = 2,
                     Title = "Avatar",
-                    Category = "Action",
+                    CategoryId = 1,
                     Year = "2011",
                     Director = "Your Dad",
                     Rating = "PG-13",
@@ -45,7 +62,7 @@ namespace Mission6_eg439.Models
                 {
                     MovieId = 3,
                     Title = "Cinderlla Story: Hillary Duff",
-                    Category = "Romance/Coming of Age",
+                    CategoryId = 3 ,
                     Year = "2011",
                     Director = "Your Dad",
                     Rating = "PG",

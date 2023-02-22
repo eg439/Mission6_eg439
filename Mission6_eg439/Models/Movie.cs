@@ -11,7 +11,6 @@ namespace Mission6_eg439.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-        public string Category { get; set; }
         public string Title { get; set; }
         public string Year { get; set; }
         public string Director { get; set; }
@@ -19,6 +18,9 @@ namespace Mission6_eg439.Models
         public bool Edited { get; set; }
         public string lentTo { get; set; }
         public string Notes { get; set; }
-
+        //foreign key
+        [Required(ErrorMessage ="Please select a Category!!")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
